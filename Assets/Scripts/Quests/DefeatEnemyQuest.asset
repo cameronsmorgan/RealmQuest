@@ -21,4 +21,4 @@ MonoBehaviour:
   reward:
     experiencePoints: 0
     items: []
-  status: 2
+  status: 0
