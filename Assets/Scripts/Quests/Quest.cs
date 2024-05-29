@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +15,8 @@ public class Quest : ScriptableObject
 public class QuestObjective
 {
     public string description;
+    public int currentAmount; // Current amount of collected items
+    public int requiredAmount; // Required amount to complete the objective
     public bool isCompleted;
 }
 

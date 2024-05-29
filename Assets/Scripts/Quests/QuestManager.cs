@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,9 +5,20 @@ public class QuestManager : MonoBehaviour
 {
     public List<Quest> quests;
 
+    public Quest GetQuestByID(string questID)
+    {
+        return quests.Find(q => q.questID == questID);
+    }
+
+    public bool IsQuestCompleted(string questID)
+    {
+        Quest quest = GetQuestByID(questID);
+        return quest != null && quest.status == QuestStatus.Completed;
+    }
+
     public void StartQuest(string questID)
     {
-        Quest quest = quests.Find(q => q.questID == questID);
+        Quest quest = GetQuestByID(questID);
         if (quest != null && quest.status == QuestStatus.NotStarted)
         {
             quest.status = QuestStatus.InProgress;
@@ -16,32 +26,55 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public void CompleteObjective(string questID, int objectiveIndex)
+    public void UpdateFlowerCount(string questID, int count)
     {
-        Quest quest = quests.Find(q => q.questID == questID);
+        Quest quest = GetQuestByID(questID);
         if (quest != null && quest.status == QuestStatus.InProgress)
         {
-            quest.objectives[objectiveIndex].isCompleted = true;
-            Debug.Log($"Completed objective: {quest.objectives[objectiveIndex].description}");
+            var objective = quest.objectives[0];
+            objective.currentAmount = count;
+
+            if (objective.currentAmount >= objective.requiredAmount)
+            {
+                CompleteObjective(questID, 0);
+            }
+        }
+    }
+
+    public void CompleteObjective(string questID, int objectiveIndex)
+    {
+        Quest quest = GetQuestByID(questID);
+        if (quest != null && quest.status == QuestStatus.InProgress)
+        {
+            var objective = quest.objectives[objectiveIndex];
+            objective.isCompleted = true;
             CheckQuestCompletion(quest);
         }
     }
 
     private void CheckQuestCompletion(Quest quest)
     {
+        bool allCompleted = true;
         foreach (var objective in quest.objectives)
         {
             if (!objective.isCompleted)
-                return;
+            {
+                allCompleted = false;
+                break;
+            }
         }
-        quest.status = QuestStatus.Completed;
-        Debug.Log($"Quest completed: {quest.questName}");
-        GiveReward(quest.reward);
+
+        if (allCompleted)
+        {
+            quest.status = QuestStatus.Completed;
+            Debug.Log($"Quest completed: {quest.questName}");
+            GiveReward(quest.reward);
+        }
     }
 
     private void GiveReward(Reward reward)
     {
-        // Implement reward logic here.
+        // Implement reward logic here
         Debug.Log($"Reward given: {reward.experiencePoints} XP");
     }
 }

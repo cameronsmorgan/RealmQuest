@@ -4,7 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "CollectItemsQuest", menuName = "Quest/CollectItemsQuest")]
 
-public class CollectItemQuest : MonoBehaviour
+public class CollectItemQuest : Quest
 {
     // Start is called before the first frame update
     void Start()
