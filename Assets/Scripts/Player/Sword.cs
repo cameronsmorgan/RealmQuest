@@ -8,11 +8,20 @@ public class Sword : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        Debug.Log("Sword collision detected with: " + collision.gameObject.name);
+
+        MeleeEnemy meleeEnemy = collision.gameObject.GetComponent<MeleeEnemy>();
+        if (meleeEnemy != null)
+        {
+            Debug.Log("Dealing damage to MeleeEnemy");
+            meleeEnemy.TakeDamage(swordDamage);
+        }
+        else
         {
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
+                Debug.Log("Dealing damage to Enemy");
                 enemy.TakeDamage(swordDamage);
             }
         }
