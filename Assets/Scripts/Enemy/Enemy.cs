@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
+    public UnityAction OnEnemyDefeated; // Event for when the enemy is defeated
+
+    public QuestManager questManager;
+    public string questID;
+    public int objectiveIndex;
 
     private StateMachine stateMachine;
     private NavMeshAgent agent;
     private GameObject player;
     public NavMeshAgent Agent { get => agent; }
-    
+
     public GameObject Player { get => player; }
 
     public Path path;
@@ -27,49 +33,47 @@ public class Enemy : MonoBehaviour
     [Header("Health Values")]
     public float maxHealth = 100f;
     public float currentHealth;
+    private bool isDead = false;
 
     [SerializeField]
     private string currentState;
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
-        stateMachine= GetComponent<StateMachine>();
+        stateMachine = GetComponent<StateMachine>();
         agent = GetComponent<NavMeshAgent>();
         stateMachine.Initialise();
         player = GameObject.FindGameObjectWithTag("Player");
 
         currentHealth = maxHealth;
-
     }
 
-    // Update is called once per frame
     void Update()
     {
-        CanSeePlayer();
-        currentState = stateMachine.activeState.ToString();
+        if (!isDead)
+        {
+            CanSeePlayer();
+            currentState = stateMachine.activeState.ToString();
+        }
     }
 
     public bool CanSeePlayer()
     {
-        if(player != null)
+        if (player != null)
         {
-            if(Vector3.Distance(transform.position,player.transform.position ) < sightDistance)
+            if (Vector3.Distance(transform.position, player.transform.position) < sightDistance)
             {
                 Vector3 targetDirection = player.transform.position - transform.position - (Vector3.up * eyeHeight);
                 float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
-                if(angleToPlayer >= -fieldOfView && angleToPlayer <= fieldOfView)
+                if (angleToPlayer >= -fieldOfView && angleToPlayer <= fieldOfView)
                 {
-                    Ray ray = new Ray(transform.position + (Vector3.up * eyeHeight) , targetDirection);
-                    RaycastHit hitInfo = new RaycastHit();
-                    if(Physics.Raycast(ray, out hitInfo, sightDistance))
+                    Ray ray = new Ray(transform.position + (Vector3.up * eyeHeight), targetDirection);
+                    RaycastHit hitInfo;
+                    if (Physics.Raycast(ray, out hitInfo, sightDistance))
                     {
-                        if(hitInfo.transform.gameObject == player)
+                        if (hitInfo.transform.gameObject == player)
                         {
                             Debug.DrawRay(ray.origin, ray.direction * sightDistance);
-
                             return true;
                         }
                     }
@@ -77,21 +81,28 @@ public class Enemy : MonoBehaviour
             }
         }
         return false;
-
     }
 
     public void TakeDamage(float amount)
     {
-        currentHealth -= amount;
-        if (currentHealth <= 0)
+        if (!isDead)
         {
-            Die();
+            currentHealth -= amount;
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
         }
     }
 
     private void Die()
     {
-        // Implement death logic (e.g., play animation, destroy object)
-        Destroy(gameObject);
+        if (!isDead)
+        {
+            isDead = true;
+            questManager.UpdateEnemyCount(questID, objectiveIndex);
+            OnEnemyDefeated?.Invoke(); // Invoke the event
+            Destroy(gameObject);
+        }
     }
 }

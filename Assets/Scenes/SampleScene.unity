@@ -375,7 +375,7 @@ Transform:
   - {fileID: 766689955}
   - {fileID: 219350860}
   m_Father: {fileID: 0}
-  m_RootOrder: 28
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: -162.711, z: 0}
 --- !u!1 &26786400
 GameObject:
@@ -1668,6 +1668,7 @@ GameObject:
   - component: {fileID: 252334546}
   - component: {fileID: 252334545}
   - component: {fileID: 252334544}
+  - component: {fileID: 252334551}
   m_Layer: 0
   m_Name: ProjectileEnemy (1)
   m_TagString: Enemy
@@ -1728,6 +1729,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec42b946f22f3d4a9d015a9221fea54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questManager: {fileID: 397534294}
+  questID: defeat_enemies_quest
+  objectiveIndex: 0
   path: {fileID: 1401594027}
   sightDistance: 20
   fieldOfView: 85
@@ -1782,16 +1786,33 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 252334543}
-  m_LocalRotation: {x: 0, y: 0.7542321, z: 0, w: -0.65660787}
-  m_LocalPosition: {x: 40.01, y: 1.63, z: 82.91}
+  m_LocalRotation: {x: -0, y: 0.7542321, z: -0, w: -0.65660787}
+  m_LocalPosition: {x: 61.969948, y: 131.99693, z: 211.70175}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1201792932}
   - {fileID: 291273444}
-  m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_Father: {fileID: 1893020828}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &252334551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252334543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45102e0969c719b488d7d0150ccc5154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questManager: {fileID: 397534294}
+  questID: defeat_enemies_quest
+  objectiveIndex: 0
+  enemies:
+  - {fileID: 252334543}
 --- !u!1 &271934522
 GameObject:
   m_ObjectHideFlags: 0
@@ -3024,6 +3045,7 @@ GameObject:
   - component: {fileID: 394051884}
   - component: {fileID: 394051883}
   - component: {fileID: 394051882}
+  - component: {fileID: 394051889}
   m_Layer: 0
   m_Name: ProjectileEnemy (2)
   m_TagString: Enemy
@@ -3084,6 +3106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec42b946f22f3d4a9d015a9221fea54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questManager: {fileID: 397534294}
+  questID: defeat_enemies_quest
+  objectiveIndex: 0
   path: {fileID: 577386739}
   sightDistance: 20
   fieldOfView: 85
@@ -3138,16 +3163,33 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 394051881}
-  m_LocalRotation: {x: 0, y: 0.7542321, z: 0, w: -0.65660787}
-  m_LocalPosition: {x: 26.19, y: 1.63, z: 82.91}
+  m_LocalRotation: {x: -0, y: 0.7542321, z: -0, w: -0.65660787}
+  m_LocalPosition: {x: 48.14995, y: 131.99693, z: 211.70175}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 310519557}
   - {fileID: 1680004765}
-  m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_Father: {fileID: 1893020828}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &394051889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394051881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45102e0969c719b488d7d0150ccc5154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questManager: {fileID: 397534294}
+  questID: defeat_enemies_quest
+  objectiveIndex: 0
+  enemies:
+  - {fileID: 394051881}
 --- !u!1 &397534293
 GameObject:
   m_ObjectHideFlags: 0
@@ -3180,6 +3222,7 @@ MonoBehaviour:
   quests:
   - {fileID: 11400000, guid: 902b7076258fa274c8c017f6ffcd455e, type: 2}
   - {fileID: 11400000, guid: c49e16d1cba452e49a63622f1f3efcb4, type: 2}
+  - {fileID: 11400000, guid: 70585b63fa5f043429342bd59b7429f6, type: 2}
 --- !u!4 &397534295
 Transform:
   m_ObjectHideFlags: 0
@@ -3559,7 +3602,7 @@ Transform:
   - {fileID: 857568955}
   - {fileID: 847532395}
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: -70.55, z: 0}
 --- !u!1 &488390501
 GameObject:
@@ -4092,7 +4135,7 @@ Transform:
   - {fileID: 333712424}
   - {fileID: 670848489}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: -162.711, z: 0}
 --- !u!1 &577633920
 GameObject:
@@ -5176,6 +5219,7 @@ GameObject:
   - component: {fileID: 759049450}
   - component: {fileID: 759049449}
   - component: {fileID: 759049448}
+  - component: {fileID: 759049455}
   m_Layer: 0
   m_Name: ProjectileEnemy (3)
   m_TagString: Enemy
@@ -5236,6 +5280,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec42b946f22f3d4a9d015a9221fea54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questManager: {fileID: 397534294}
+  questID: defeat_enemies_quest
+  objectiveIndex: 0
   path: {fileID: 1393563790}
   sightDistance: 20
   fieldOfView: 85
@@ -5290,16 +5337,33 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759049447}
-  m_LocalRotation: {x: 0, y: 0.7542321, z: 0, w: -0.65660787}
-  m_LocalPosition: {x: 19.02, y: 1.63, z: 75.25}
+  m_LocalRotation: {x: -0, y: 0.7542321, z: -0, w: -0.65660787}
+  m_LocalPosition: {x: 40.97995, y: 131.99693, z: 204.04175}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1106475328}
   - {fileID: 2117701054}
-  m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_Father: {fileID: 1893020828}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &759049455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759049447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45102e0969c719b488d7d0150ccc5154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questManager: {fileID: 397534294}
+  questID: defeat_enemies_quest
+  objectiveIndex: 0
+  enemies:
+  - {fileID: 759049447}
 --- !u!1 &759168615
 GameObject:
   m_ObjectHideFlags: 0
@@ -5331,7 +5395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questManager: {fileID: 397534294}
   questID: collectItemQuest
-  enemyQuest: {fileID: 1926413256}
+  enemyQuests: []
 --- !u!4 &759168617
 Transform:
   m_ObjectHideFlags: 0
@@ -5780,6 +5844,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5985527, y: 1.4785404, z: 1}
   m_Center: {x: 0.0022449493, y: 0.9145415, z: 0}
+--- !u!114 &786647853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786647848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972a0c8e832fed244bf4704b3e553c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questManager: {fileID: 397534294}
+  questID: defeat_enemies_quest
+  enemyQuests:
+  - {fileID: 252334551}
+  - {fileID: 394051889}
+  - {fileID: 759049455}
+  - {fileID: 1225449936}
+  - {fileID: 1536395647}
+  - {fileID: 984465913}
 --- !u!224 &796048735 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8252512435170318667, guid: 2f975c77a276e3f4aaf3fa41cd497132, type: 3}
@@ -6348,7 +6433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4459864850019384738, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 78
+      value: 104.2
       objectReference: {fileID: 0}
     - target: {fileID: 4459864850019384738, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6472,6 +6557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 972895383}
   - component: {fileID: 972895382}
+  - component: {fileID: 972895384}
   m_Layer: 0
   m_Name: ConversationEventInfo
   m_TagString: Untagged
@@ -6513,6 +6599,37 @@ Transform:
   m_Father: {fileID: 1501340221}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &972895384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972895381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00abedce3cdbbba46bf2d86c9518c9f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 786647853}
+        m_TargetAssemblyTypeName: QuestGiver, Assembly-CSharp
+        m_MethodName: OnDialogueOptionSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  NodeID: 1
+  TMPFont: {fileID: 0}
+  Icon: {fileID: 0}
+  Audio: {fileID: 0}
 --- !u!1001 &974055439
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6606,6 +6723,7 @@ GameObject:
   - component: {fileID: 984465908}
   - component: {fileID: 984465907}
   - component: {fileID: 984465906}
+  - component: {fileID: 984465913}
   m_Layer: 0
   m_Name: ProjectileEnemy (6)
   m_TagString: Enemy
@@ -6666,6 +6784,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec42b946f22f3d4a9d015a9221fea54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questManager: {fileID: 397534294}
+  questID: defeat_enemies_quest
+  objectiveIndex: 0
   path: {fileID: 474954269}
   sightDistance: 20
   fieldOfView: 85
@@ -6720,16 +6841,33 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 984465905}
-  m_LocalRotation: {x: 0, y: 0.7542321, z: 0, w: -0.65660787}
-  m_LocalPosition: {x: 34.91, y: 1.63, z: 63.6}
+  m_LocalRotation: {x: -0, y: 0.7542321, z: -0, w: -0.65660787}
+  m_LocalPosition: {x: 56.86995, y: 131.99693, z: 192.39175}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1441887966}
   - {fileID: 1650317497}
-  m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_Father: {fileID: 1893020828}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &984465913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984465905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45102e0969c719b488d7d0150ccc5154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questManager: {fileID: 397534294}
+  questID: defeat_enemies_quest
+  objectiveIndex: 0
+  enemies:
+  - {fileID: 984465905}
 --- !u!1001 &986002992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6949,7 +7087,7 @@ Transform:
   - {fileID: 26786401}
   - {fileID: 576871174}
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: -162.635, z: 0}
 --- !u!4 &1038033810 stripped
 Transform:
@@ -7443,6 +7581,7 @@ GameObject:
   - component: {fileID: 1225449931}
   - component: {fileID: 1225449930}
   - component: {fileID: 1225449929}
+  - component: {fileID: 1225449936}
   m_Layer: 0
   m_Name: ProjectileEnemy (4)
   m_TagString: Enemy
@@ -7503,6 +7642,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec42b946f22f3d4a9d015a9221fea54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questManager: {fileID: 397534294}
+  questID: defeat_enemies_quest
+  objectiveIndex: 0
   path: {fileID: 1036625799}
   sightDistance: 20
   fieldOfView: 85
@@ -7557,16 +7699,33 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1225449928}
-  m_LocalRotation: {x: 0, y: 0.7542321, z: 0, w: -0.65660787}
-  m_LocalPosition: {x: 37.52, y: 1.63, z: 72.91}
+  m_LocalRotation: {x: -0, y: 0.7542321, z: -0, w: -0.65660787}
+  m_LocalPosition: {x: 59.47995, y: 131.99693, z: 201.70175}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1292547142}
   - {fileID: 965708537}
-  m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_Father: {fileID: 1893020828}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1225449936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225449928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45102e0969c719b488d7d0150ccc5154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questManager: {fileID: 397534294}
+  questID: defeat_enemies_quest
+  objectiveIndex: 0
+  enemies:
+  - {fileID: 1225449928}
 --- !u!1001 &1230765530
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8408,7 +8567,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questManager: {fileID: 397534294}
   questID: defeat_enemy
-  enemyQuest: {fileID: 1926413256}
+  enemyQuests:
+  - {fileID: 1926413256}
 --- !u!1 &1393563789
 GameObject:
   m_ObjectHideFlags: 0
@@ -8460,7 +8620,7 @@ Transform:
   - {fileID: 898506384}
   - {fileID: 378372190}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: -136.345, z: 0}
 --- !u!1 &1401594026
 GameObject:
@@ -8926,9 +9086,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83189876d4d389f43b7dd2e925aa112e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentIDCounter: 1
-  json: '{"Options":[],"Parameters":[],"SpeechNodes":[{"Connections":[],"EditorInfo":{"isRoot":true,"xPos":215.200012,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Test
-    test","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Old
+  CurrentIDCounter: 2
+  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":187.200012,"yPos":154.8},"ID":1,"ParamActions":[],"TMPFontGUID":null,"Text":"I
+    shall","parentUIDs":[0],"SpeechUID":-1}],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1}],"EditorInfo":{"isRoot":true,"xPos":180.800018,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"If
+    you seek the dragon you must liberate the village","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Old
     Wise Man","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
   saveVersion: 110
   DefaultName: Old Wise Man
@@ -8936,11 +9097,24 @@ MonoBehaviour:
   DefaultFont: {fileID: 0}
   NodeSerializedDataList:
   - {fileID: 972895382}
+  - {fileID: 972895384}
   ContinueFont: {fileID: 0}
   EndConversationFont: {fileID: 0}
   Event:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 786647853}
+        m_TargetAssemblyTypeName: QuestGiver, Assembly-CSharp
+        m_MethodName: OnDialogueOptionSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1501340221
 Transform:
   m_ObjectHideFlags: 0
@@ -9138,6 +9312,7 @@ GameObject:
   - component: {fileID: 1536395642}
   - component: {fileID: 1536395641}
   - component: {fileID: 1536395640}
+  - component: {fileID: 1536395647}
   m_Layer: 0
   m_Name: ProjectileEnemy (5)
   m_TagString: Enemy
@@ -9198,6 +9373,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec42b946f22f3d4a9d015a9221fea54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questManager: {fileID: 397534294}
+  questID: defeat_enemies_quest
+  objectiveIndex: 0
   path: {fileID: 25659356}
   sightDistance: 20
   fieldOfView: 85
@@ -9252,16 +9430,33 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1536395639}
-  m_LocalRotation: {x: 0, y: 0.7542321, z: 0, w: -0.65660787}
-  m_LocalPosition: {x: 16.84, y: 1.63, z: 63.6}
+  m_LocalRotation: {x: -0, y: 0.7542321, z: -0, w: -0.65660787}
+  m_LocalPosition: {x: 38.79995, y: 131.99693, z: 192.39175}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2052473227}
   - {fileID: 1620043638}
-  m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_Father: {fileID: 1893020828}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1536395647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536395639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45102e0969c719b488d7d0150ccc5154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questManager: {fileID: 397534294}
+  questID: defeat_enemies_quest
+  objectiveIndex: 0
+  enemies:
+  - {fileID: 1536395639}
 --- !u!4 &1543261326 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4459864851310106429, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
@@ -9300,7 +9495,7 @@ Transform:
   - {fileID: 310569408}
   - {fileID: 1023635428}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1565857585 stripped
 RectTransform:
@@ -11371,6 +11566,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f31fb0f07e7e9f64491c4d46fca58c44, type: 3}
+--- !u!1 &1893020827
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1893020828}
+  m_Layer: 0
+  m_Name: VillageEnemies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1893020828
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893020827}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -21.95995, y: -130.36693, z: -128.79175}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 252334550}
+  - {fileID: 394051888}
+  - {fileID: 759049454}
+  - {fileID: 1225449935}
+  - {fileID: 1536395646}
+  - {fileID: 984465912}
+  m_Father: {fileID: 0}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1911738601 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4459864850019384750, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
@@ -11421,7 +11653,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1918401265
 Transform:
   m_ObjectHideFlags: 0
@@ -11758,6 +11990,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec42b946f22f3d4a9d015a9221fea54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questManager: {fileID: 0}
+  questID: 
+  objectiveIndex: 0
   path: {fileID: 1467263318}
   sightDistance: 20
   fieldOfView: 85
@@ -11797,6 +12032,8 @@ MonoBehaviour:
   questManager: {fileID: 397534294}
   questID: defeat_enemy
   objectiveIndex: 0
+  enemies:
+  - {fileID: 1926413247}
 --- !u!136 &1926413257
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -13496,7 +13733,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &9122190277587462631
 Animator:
   serializedVersion: 5

@@ -6,13 +6,16 @@ public class QuestGiver : MonoBehaviour
 {
     public QuestManager questManager;
     public string questID;
-        public EnemyQuest enemyQuest; // Reference to the enemy quest script
+    public List<EnemyQuest> enemyQuests; // List of enemy quest scripts
 
 
     public void GiveQuest()
     {
         questManager.StartQuest(questID);
-        enemyQuest.ActivateEnemy(); // Activate the enemy when the quest is given
+        foreach (var enemyQuest in enemyQuests)
+        {
+            enemyQuest.ActivateEnemies(); // Activate each enemy when the quest is given
+        }
 
     }
 

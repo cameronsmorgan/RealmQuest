@@ -41,11 +41,39 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    public void UpdateEnemyCount(string questID, int objectiveIndex)
+    {
+        Quest quest = GetQuestByID(questID);
+        if (quest != null && quest.status == QuestStatus.InProgress)
+        {
+            if (objectiveIndex < 0 || objectiveIndex >= quest.objectives.Length)
+            {
+                Debug.LogError($"Invalid objectiveIndex: {objectiveIndex} for questID: {questID}");
+                return;
+            }
+
+            var objective = quest.objectives[objectiveIndex];
+            objective.currentAmount++;
+            Debug.Log($"Enemy defeated: {objective.currentAmount}/{objective.requiredAmount}");
+
+            if (objective.currentAmount >= objective.requiredAmount)
+            {
+                CompleteObjective(questID, objectiveIndex);
+            }
+        }
+    }
+
     public void CompleteObjective(string questID, int objectiveIndex)
     {
         Quest quest = GetQuestByID(questID);
         if (quest != null && quest.status == QuestStatus.InProgress)
         {
+            if (objectiveIndex < 0 || objectiveIndex >= quest.objectives.Length)
+            {
+                Debug.LogError($"Invalid objectiveIndex: {objectiveIndex} for questID: {questID}");
+                return;
+            }
+
             var objective = quest.objectives[objectiveIndex];
             objective.isCompleted = true;
             CheckQuestCompletion(quest);
