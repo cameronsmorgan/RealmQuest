@@ -9,6 +9,7 @@ public class PatrolState : BaseState
     public float waitTimer;
     public override void Enter()
     {
+        enemy.SetAnimationBool("IsWalking", true); // Set walking animation
 
     }
     public override void Perform()
@@ -22,6 +23,7 @@ public class PatrolState : BaseState
     }
     public override void Exit()
     {
+        enemy.SetAnimationBool("IsWalking", false); // Stop walking animation
 
     }
 

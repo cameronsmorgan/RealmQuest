@@ -19,6 +19,9 @@ public class DragonAI : MonoBehaviour
     private Transform player;
     private float nextFireBreathTime;
 
+    private Animator animator;
+
+
     public enum DragonState
     {
         Idle,
@@ -33,6 +36,8 @@ public class DragonAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         currentState = DragonState.Idle;
+        animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame

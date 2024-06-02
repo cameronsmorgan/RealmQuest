@@ -10,10 +10,14 @@ public class AttackState : BaseState
     private float shotTimer;
     public override void Enter()
     {
+        enemy.SetAnimationBool("IsAttacking", true); // Set attack animation
+
     }
 
     public override void Exit()
     {
+        enemy.SetAnimationBool("IsAttacking", false); // Stop attack animation
+
     }
 
     public override void Perform()
@@ -45,6 +49,57 @@ public class AttackState : BaseState
     }
 
     public void Shoot()
+    {
+        if (enemy.isDragon)
+        {
+            PlayFireBreathEffect();
+        }
+        else
+        {
+            FireBullet();
+        }
+        shotTimer = 0;
+    }
+
+
+    private void PlayFireBreathEffect()
+    {
+        // Load particle effect from Resources
+        GameObject fireBreathPrefab = Resources.Load<GameObject>("Prefabs/FireBreath");
+        if (fireBreathPrefab != null)
+        {
+            GameObject fireBreathInstance = GameObject.Instantiate(fireBreathPrefab, enemy.gunBarrel.position, enemy.gunBarrel.rotation);
+            FireBreath fireBreathEffect = fireBreathInstance.GetComponent<FireBreath>();
+            if (fireBreathEffect != null)
+            {
+                fireBreathEffect.StartDamaging();
+                ParticleSystem ps = fireBreathEffect.GetComponent<ParticleSystem>();
+                ps.Play();
+                Debug.Log("Dragon fire breath effect played at position: " + fireBreathInstance.transform.position);
+                // Optionally, stop damaging and destroy the particle system after it finishes playing
+                enemy.StartFireBreathCoroutine(StopFireBreathEffect(fireBreathInstance, fireBreathEffect));
+            }
+            else
+            {
+                Debug.LogError("The instantiated fire breath prefab does not have a FireBreath component.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Fire breath prefab could not be loaded from Resources. Check the path and name.");
+        }
+    }
+
+    private IEnumerator StopFireBreathEffect(GameObject fireBreathInstance, FireBreath fireBreathEffect)
+    {
+        ParticleSystem ps = fireBreathEffect.GetComponent<ParticleSystem>();
+        yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
+        fireBreathEffect.StopDamaging();
+        Object.Destroy(fireBreathInstance);
+    }
+
+
+    private void FireBullet()
     {
         Transform gunBarrel = enemy.gunBarrel;
         if (gunBarrel == null)
@@ -81,8 +136,8 @@ public class AttackState : BaseState
         Debug.Log("Bullet velocity set to: " + bulletRigidbody.velocity);
 
         Debug.Log("Shoot");
-        shotTimer = 0;
     }
+
 
     // Start is called before the first frame update
     void Start()

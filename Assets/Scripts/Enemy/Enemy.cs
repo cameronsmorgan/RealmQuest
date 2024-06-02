@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
+    public bool isDragon; // Flag to indicate if the enemy is a dragon
+
     public UnityAction OnEnemyDefeated; // Event for when the enemy is defeated
 
     public QuestManager questManager;
@@ -15,6 +17,8 @@ public class Enemy : MonoBehaviour
     private StateMachine stateMachine;
     private NavMeshAgent agent;
     private GameObject player;
+    private Animator animator; // Add Animator reference
+
     public NavMeshAgent Agent { get => agent; }
 
     public GameObject Player { get => player; }
@@ -30,6 +34,7 @@ public class Enemy : MonoBehaviour
     [Range(0.1f, 10f)]
     public float fireRate;
 
+
     [Header("Health Values")]
     public float maxHealth = 100f;
     public float currentHealth;
@@ -42,6 +47,8 @@ public class Enemy : MonoBehaviour
     {
         stateMachine = GetComponent<StateMachine>();
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>(); // Initialize Animator
+
         stateMachine.Initialise();
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -97,12 +104,34 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        if (!isDead)
-        {
+
+        if (currentHealth <= 0)
+        { 
             isDead = true;
             questManager.UpdateEnemyCount(questID, objectiveIndex);
             OnEnemyDefeated?.Invoke(); // Invoke the event
-            Destroy(gameObject);
+            Destroy(gameObject, 2f);
+
+            animator.SetBool("IsDead", true); // Set animation parameter
+
+        }
+    }
+
+    public void SetAnimationBool(string parameter, bool value)
+    {
+        if (animator != null)
+        {
+            animator.SetBool(parameter, value);
+        }
+    }
+
+    public void StartFireBreathCoroutine(IEnumerator coroutine)
+    {
+        if (isDragon == true)
+        {
+
+
+            StartCoroutine(coroutine);
         }
     }
 }
