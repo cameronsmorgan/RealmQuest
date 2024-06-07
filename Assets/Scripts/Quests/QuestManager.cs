@@ -4,7 +4,12 @@ using UnityEngine;
 public class QuestManager : MonoBehaviour
 {
     public List<Quest> quests;
+    private QuestUIManager questUIManager;
 
+    void Start()
+    {
+        questUIManager = FindObjectOfType<QuestUIManager>();
+    }
     public Quest GetQuestByID(string questID)
     {
         return quests.Find(q => q.questID == questID);
@@ -23,6 +28,8 @@ public class QuestManager : MonoBehaviour
         {
             quest.status = QuestStatus.InProgress;
             Debug.Log($"Started quest: {quest.questName}");
+            questUIManager.ShowQuest(quest); // Show the quest in the UI
+
         }
     }
 
@@ -33,6 +40,8 @@ public class QuestManager : MonoBehaviour
         {
             var objective = quest.objectives[0];
             objective.currentAmount = count;
+            questUIManager.UpdateQuestObjective(quest);
+
 
             if (objective.currentAmount >= objective.requiredAmount)
             {
@@ -54,6 +63,8 @@ public class QuestManager : MonoBehaviour
 
             var objective = quest.objectives[objectiveIndex];
             objective.currentAmount++;
+            questUIManager.UpdateQuestObjective(quest);
+
             Debug.Log($"Enemy defeated: {objective.currentAmount}/{objective.requiredAmount}");
 
             if (objective.currentAmount >= objective.requiredAmount)
@@ -96,7 +107,11 @@ public class QuestManager : MonoBehaviour
         {
             quest.status = QuestStatus.Completed;
             Debug.Log($"Quest completed: {quest.questName}");
+            questUIManager.UpdateQuestStatus(quest); // Update the quest status in the UI
+
             GiveReward(quest.reward);
+            questUIManager.HideQuest(); // Optionally hide the quest UI when completed
+
         }
     }
 

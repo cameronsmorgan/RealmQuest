@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f242ed9b7ccbb3b49b902df8182f67d6, type: 3}
   m_Name: DragonQuest
   m_EditorClassIdentifier: 
-  questID: dragpn_quest
+  questID: dragon_quest
   questName: Dragon Quest
   description: 
   objectives:
@@ -23,4 +23,4 @@ MonoBehaviour:
   reward:
     experiencePoints: 0
     items: []
-  status: 0
+  status: 1
