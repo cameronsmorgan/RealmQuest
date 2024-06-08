@@ -73,6 +73,14 @@ public class FirstPersonController : MonoBehaviour
     public float sprintFOV = 80f;
     public float sprintFOVStepTime = 10f;
 
+    // Step sound variables
+    public AudioSource audioSource;
+    public AudioClip[] stepSounds;
+    public float stepInterval = 0.5f; // Time between steps
+    private float stepTimer = 0f;
+    public float walkPitch = 1f; // Normal pitch for walking
+    public float sprintPitch = 1.2f; // Increased pitch for sprinting
+
     // Sprint Bar
     public bool useSprintBar = true;
     public bool hideBarWhenFull = true;
@@ -274,15 +282,21 @@ public class FirstPersonController : MonoBehaviour
 
         #region Sprint
 
-        if(enableSprint)
+        if (enableSprint)
         {
-            if(isSprinting)
+            if (isSprinting)
             {
                 isZoomed = false;
                 playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, sprintFOV, sprintFOVStepTime * Time.deltaTime);
 
+                // Set the pitch for sprinting
+                if (audioSource != null)
+                {
+                    audioSource.pitch = sprintPitch;
+                }
+
                 // Drain sprint remaining while sprinting
-                if(!unlimitedSprint)
+                if (!unlimitedSprint)
                 {
                     sprintRemaining -= 1 * Time.deltaTime;
                     if (sprintRemaining <= 0)
@@ -294,13 +308,19 @@ public class FirstPersonController : MonoBehaviour
             }
             else
             {
+                // Set the pitch for walking
+                if (audioSource != null)
+                {
+                    audioSource.pitch = walkPitch;
+                }
+
                 // Regain sprint while not sprinting
                 sprintRemaining = Mathf.Clamp(sprintRemaining += 1 * Time.deltaTime, 0, sprintDuration);
             }
 
             // Handles sprint cooldown 
             // When sprint remaining == 0 stops sprint ability until hitting cooldown
-            if(isSprintCooldown)
+            if (isSprintCooldown)
             {
                 sprintCooldown -= 1 * Time.deltaTime;
                 if (sprintCooldown <= 0)
@@ -314,7 +334,7 @@ public class FirstPersonController : MonoBehaviour
             }
 
             // Handles sprintBar 
-            if(useSprintBar && !unlimitedSprint)
+            if (useSprintBar && !unlimitedSprint)
             {
                 float sprintRemainingPercent = sprintRemaining / sprintDuration;
                 sprintBar.transform.localScale = new Vector3(sprintRemainingPercent, 1f, 1f);
@@ -326,7 +346,7 @@ public class FirstPersonController : MonoBehaviour
         #region Jump
 
         // Gets input and calls jump method
-        if(enableJump && Input.GetKeyDown(jumpKey) && isGrounded)
+        if (enableJump && Input.GetKeyDown(jumpKey) && isGrounded)
         {
             Jump();
         }
@@ -378,13 +398,25 @@ public class FirstPersonController : MonoBehaviour
             if (targetVelocity.x != 0 || targetVelocity.z != 0 && isGrounded)
             {
                 isWalking = true;
+
+                // Play step sound if not already playing
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
             }
             else
             {
                 isWalking = false;
+
+                // Stop step sound if not walking
+                if (audioSource.isPlaying)
+                {
+                    audioSource.Stop();
+                }
             }
 
-            // All movement calculations shile sprint is active
+            // All movement calculations while sprint is active
             if (enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
             {
                 targetVelocity = transform.TransformDirection(targetVelocity) * sprintSpeed;
@@ -396,7 +428,7 @@ public class FirstPersonController : MonoBehaviour
                 velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
                 velocityChange.y = 0;
 
-                // Player is only moving when valocity change != 0
+                // Player is only moving when velocity change != 0
                 // Makes sure fov change only happens during movement
                 if (velocityChange.x != 0 || velocityChange.z != 0)
                 {
@@ -526,7 +558,18 @@ public class FirstPersonController : MonoBehaviour
             joint.localPosition = new Vector3(Mathf.Lerp(joint.localPosition.x, jointOriginalPos.x, Time.deltaTime * bobSpeed), Mathf.Lerp(joint.localPosition.y, jointOriginalPos.y, Time.deltaTime * bobSpeed), Mathf.Lerp(joint.localPosition.z, jointOriginalPos.z, Time.deltaTime * bobSpeed));
         }
     }
+
+    private void PlayStepSound()
+    {
+        if (stepSounds.Length > 0)
+        {
+            int index = Random.Range(0, stepSounds.Length);
+            audioSource.PlayOneShot(stepSounds[index]);
+        }
+    }
 }
+
+
 
 
 
@@ -621,6 +664,21 @@ public class FirstPersonController : MonoBehaviour
         GUI.enabled = true;
 
         EditorGUILayout.Space();
+
+        #region Sound Setup
+
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+        GUILayout.Label("Sound Setup", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
+        EditorGUILayout.Space();
+
+        fpc.audioSource = (AudioSource)EditorGUILayout.ObjectField(new GUIContent("Audio Source", "Audio source for playing sounds."), fpc.audioSource, typeof(AudioSource), true);
+        SerializedProperty stepSounds = SerFPC.FindProperty("stepSounds");
+        EditorGUILayout.PropertyField(stepSounds, new GUIContent("Step Sounds"), true);
+        fpc.walkPitch = EditorGUILayout.Slider(new GUIContent("Walk Pitch", "Pitch of the step sound when walking."), fpc.walkPitch, 0.5f, 3f);
+        fpc.sprintPitch = EditorGUILayout.Slider(new GUIContent("Sprint Pitch", "Pitch of the step sound when sprinting."), fpc.sprintPitch, 0.5f, 3f);
+
+        #endregion
 
         #region Sprint
 
@@ -737,6 +795,12 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
+
+
+
+
 }
+
+
 
 #endif
