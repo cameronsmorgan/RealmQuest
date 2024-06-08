@@ -53,4 +53,13 @@ public class Shield : MonoBehaviour
             Debug.Log("Shield deactivated.");
         }
     }
+
+    public bool IsShieldActive()
+    {
+        if (shieldAnimator != null)
+        {
+            return shieldAnimator.GetBool("IsActive");
+        }
+        return false;
+    }
 }
