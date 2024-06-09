@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestGiver : MonoBehaviour
 {
@@ -10,8 +11,11 @@ public class QuestGiver : MonoBehaviour
     public GameObject replacementNPC; // Reference to the replacement NPC GameObject
     public float destroyDelay = 5f; // Time delay before activation of the replacement NPC
 
+
+
     void Start()
     {
+       
         // Ensure the replacement NPC starts inactive
         if (replacementNPC != null)
         {
@@ -66,4 +70,6 @@ public class QuestGiver : MonoBehaviour
         Destroy(gameObject);
         Debug.Log("Original NPC destroyed.");
     }
+
+  
 }
