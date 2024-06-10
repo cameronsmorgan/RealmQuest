@@ -45,4 +45,12 @@ public class QuestUIManager : MonoBehaviour
     {
         questStatusText.text = "Status: " + quest.status.ToString();
     }
+
+    public void ToggleQuestPanel()
+    {
+        if (questPanel != null)
+        {
+            questPanel.SetActive(!questPanel.activeSelf); // Toggle the active state of the quest panel
+        }
+    }
 }

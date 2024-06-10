@@ -17,10 +17,10 @@ MonoBehaviour:
   description: 
   objectives:
   - description: 
-    currentAmount: 0
+    currentAmount: 10
     requiredAmount: 10
-    isCompleted: 0
+    isCompleted: 1
   reward:
     experiencePoints: 0
     items: []
-  status: 1
+  status: 2
