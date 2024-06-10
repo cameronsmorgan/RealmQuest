@@ -5,11 +5,14 @@ public class QuestManager : MonoBehaviour
 {
     public List<Quest> quests;
     private QuestUIManager questUIManager;
+    private FadeManager fadeManager; // Reference to the FadeManager
 
     void Start()
     {
         questUIManager = FindObjectOfType<QuestUIManager>();
+        fadeManager = FindObjectOfType<FadeManager>(); // Find the FadeManager in the scene
     }
+
     public Quest GetQuestByID(string questID)
     {
         return quests.Find(q => q.questID == questID);
@@ -29,7 +32,6 @@ public class QuestManager : MonoBehaviour
             quest.status = QuestStatus.InProgress;
             Debug.Log($"Started quest: {quest.questName}");
             questUIManager.ShowQuest(quest); // Show the quest in the UI
-
         }
     }
 
@@ -41,7 +43,6 @@ public class QuestManager : MonoBehaviour
             var objective = quest.objectives[0];
             objective.currentAmount = count;
             questUIManager.UpdateQuestObjective(quest);
-
 
             if (objective.currentAmount >= objective.requiredAmount)
             {
@@ -112,6 +113,11 @@ public class QuestManager : MonoBehaviour
             GiveReward(quest.reward);
             questUIManager.HideQuest(); // Optionally hide the quest UI when completed
 
+            // Check if the completed quest is the DragonQuest
+            if (quest is DragonQuest)
+            {
+                fadeManager.FadeToBlack(); // Trigger the fade to black effect and scene transition
+            }
         }
     }
 
