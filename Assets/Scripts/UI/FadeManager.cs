@@ -14,9 +14,9 @@ public class FadeManager : MonoBehaviour
         SetAlpha(0);
     }
 
-    public void FadeToBlack()
+    public void FadeToBlack(string sceneName)
     {
-        StartCoroutine(Fade(0, 1, fadeDuration, "PlayerWinScene"));
+        StartCoroutine(Fade(0, 1, fadeDuration, sceneName));
     }
 
     private IEnumerator Fade(float startAlpha, float endAlpha, float duration, string sceneName)

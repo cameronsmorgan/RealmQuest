@@ -116,7 +116,7 @@ public class QuestManager : MonoBehaviour
             // Check if the completed quest is the DragonQuest
             if (quest is DragonQuest)
             {
-                fadeManager.FadeToBlack(); // Trigger the fade to black effect and scene transition
+                fadeManager.FadeToBlack("PlayerWinScene"); // Trigger the fade to black effect and scene transition
             }
         }
     }
