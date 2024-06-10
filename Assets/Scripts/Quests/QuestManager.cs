@@ -6,11 +6,15 @@ public class QuestManager : MonoBehaviour
     public List<Quest> quests;
     private QuestUIManager questUIManager;
     private FadeManager fadeManager; // Reference to the FadeManager
+    private AudioManager audioManager; // Reference to the AudioManager
+
 
     void Start()
     {
         questUIManager = FindObjectOfType<QuestUIManager>();
         fadeManager = FindObjectOfType<FadeManager>(); // Find the FadeManager in the scene
+        audioManager = FindObjectOfType<AudioManager>(); // Find the AudioManager in the scene
+
     }
 
     public Quest GetQuestByID(string questID)
@@ -32,6 +36,11 @@ public class QuestManager : MonoBehaviour
             quest.status = QuestStatus.InProgress;
             Debug.Log($"Started quest: {quest.questName}");
             questUIManager.ShowQuest(quest); // Show the quest in the UI
+
+            if (quest is DragonQuest)
+            {
+                audioManager.PlayDragonQuestSoundtrack(); // Play the DragonQuest soundtrack
+            }
         }
     }
 
