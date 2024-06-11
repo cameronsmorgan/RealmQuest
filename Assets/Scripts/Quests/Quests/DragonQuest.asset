@@ -18,7 +18,7 @@ MonoBehaviour:
   objectives:
   - description: 
     currentAmount: 0
-    requiredAmount: 1
+    requiredAmount: 5
     isCompleted: 0
   reward:
     experiencePoints: 0

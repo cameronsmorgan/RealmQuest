@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
-
+using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     public bool isDragon; // Flag to indicate if the enemy is a dragon
@@ -43,6 +43,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private string currentState;
 
+    public Image healthBarImage;
+
+
     void Start()
     {
         stateMachine = GetComponent<StateMachine>();
@@ -53,6 +56,11 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
 
         currentHealth = maxHealth;
+
+        if (isDragon && healthBarImage != null)
+        {
+            SetHealth(currentHealth, maxHealth);
+        }
     }
 
     void Update()
@@ -95,6 +103,11 @@ public class Enemy : MonoBehaviour
         if (!isDead)
         {
             currentHealth -= amount;
+
+            if (isDragon && healthBarImage != null)
+            {
+                SetHealth(currentHealth, maxHealth);
+            }
             if (currentHealth <= 0)
             {
                 Die();
@@ -168,5 +181,10 @@ public class Enemy : MonoBehaviour
 
             StartCoroutine(coroutine);
         }
+    }
+
+    public void SetHealth(float health, float maxHealth)
+    {
+        healthBarImage.fillAmount = health / maxHealth;
     }
 }

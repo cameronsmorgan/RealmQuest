@@ -122,6 +122,9 @@ public class QuestManager : MonoBehaviour
             GiveReward(quest.reward);
             questUIManager.HideQuest(); // Optionally hide the quest UI when completed
 
+            audioManager.PlayQuestCompletionSound(); // Play quest completion sound
+
+
             // Check if the completed quest is the DragonQuest
             if (quest is DragonQuest)
             {

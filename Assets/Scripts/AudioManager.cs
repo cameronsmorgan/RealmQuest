@@ -6,6 +6,8 @@ public class AudioManager : MonoBehaviour
 {
     public AudioSource defaultSoundtrack;
     public AudioSource dragonQuestSoundtrack;
+    public AudioSource questCompletionSound; // Add AudioSource for quest completion sound
+
 
     void Start()
     {
@@ -28,5 +30,10 @@ public class AudioManager : MonoBehaviour
             defaultSoundtrack.Stop();
         }
         dragonQuestSoundtrack.Play();
+    }
+
+    public void PlayQuestCompletionSound()
+    {
+        questCompletionSound.Play(); // Play quest completion sound
     }
 }

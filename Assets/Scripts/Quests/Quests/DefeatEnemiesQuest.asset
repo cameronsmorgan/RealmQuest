@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 04ac9b8b506cf3f4993476b09e961acf, type: 3}
   m_Name: DefeatEnemiesQuest
   m_EditorClassIdentifier: Assembly-CSharp::DefeatEnemiesQuest
   questID: defeat_enemies_quest
-  questName: Defeat Enemies
+  questName: Defeat Enemies Quest
   description: 
   objectives:
   - description: 
