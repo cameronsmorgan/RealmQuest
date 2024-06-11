@@ -101,21 +101,56 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
+    }
     private void Die()
     {
+        if (isDead) return;
 
-        if (currentHealth <= 0)
-        { 
-            isDead = true;
-            questManager.UpdateEnemyCount(questID, objectiveIndex);
-            OnEnemyDefeated?.Invoke(); // Invoke the event
-            Destroy(gameObject, 2f);
+        isDead = true;
+        animator.SetBool("IsDead", true); // Set animation parameter
 
-            animator.SetBool("IsDead", true); // Set animation parameter
+        agent.isStopped = true; // Stop the NavMeshAgent
+        agent.enabled = false; // Disable the NavMeshAgent
 
+        // Optionally disable colliders or other components
+       
+
+        // Disable other components as needed
+        stateMachine.enabled = false;
+
+        questManager.UpdateEnemyCount(questID, objectiveIndex);
+        OnEnemyDefeated?.Invoke(); // Invoke the event
+
+        if (!isDragon)
+        {
+            StartCoroutine(DestroyAfterDelay(2f)); // Destroy after 2 seconds if not a dragon
+        }
+        else
+        {
+            StartCoroutine(DisableDragonComponentsAfterDelay(2f)); // Disable components after 2 seconds
         }
     }
+    private IEnumerator DisableDragonComponentsAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Disable other components as needed
+       
+        // You can disable other components here
+
+        // Optionally, you can freeze the dragon's position to ensure it stays in the last frame of the animation
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+        }
+    }
+
+
 
     public void SetAnimationBool(string parameter, bool value)
     {
